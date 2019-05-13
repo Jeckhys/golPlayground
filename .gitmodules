@@ -1,0 +1,14 @@
+[submodule "Submodules/SFML"]
+	path = Submodules/SFML
+	url = https://github.com/SFML/SFML.git
+	branch = 2.5.x
+	ignore = untracked
+[submodule "Submodules/TGUI"]
+	path = Submodules/TGUI
+	url = https://github.com/texus/TGUI.git
+	branch = 0.8
+	ignore = untracked
+[submodule "Submodules/Catch2"]
+	path = Submodules/Catch2
+	url = https://github.com/catchorg/Catch2.git
+	ignore = untracked
