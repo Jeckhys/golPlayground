@@ -28,7 +28,7 @@ sudo make install
 
 cd ../../..
 
-# Compiling Whimsical
+# Compiling golPlayground
 
 mkdir Build
 cd Build

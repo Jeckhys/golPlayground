@@ -1,0 +1,33 @@
+Button {
+    BackgroundColor         = #0a192f;
+    BackgroundColorHover    = rgba(100, 255, 218, 18);
+    BackgroundColorDown     = rgba(100, 255, 218, 18);
+    BackgroundColorDisabled = #6EA99F;
+    Borders                 = (1, 1, 1, 1);
+    BorderColor             = #64ffda;
+    BorderColorHover        = #64ffda;
+    BorderColorDown         = #64ffda;
+    BorderColorDisabled     = #64ffda;
+    Font                    = "default.ttf";
+    TextColor               = #64ffda;
+    TextColorHover          = #64ffda;
+    TextColorDown           = #64ffda;
+    TextColorDisabled       = #64ffda;
+}
+
+ChildWindow {
+    TitleBarColor          = #0a192f;
+    TitleColor             = #e6f1ff;
+    BackgroundColor        = #172a45;
+    BorderColor            = #64ffda;
+    Borders                = (1, 1, 1, 1);
+    DistanceToSide         = 8;
+    PaddingBetweenButtons  = 5;
+    ShowTextOnTitleButtons = true;
+    BorderBelowTitleBar    = 1;
+    CloseButton            = &Button;
+}
+
+Label {
+    TextColor = #e6f1ff;
+}
