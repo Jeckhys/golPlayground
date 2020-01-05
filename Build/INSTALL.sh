@@ -35,6 +35,12 @@ cd Build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make all
 
+# Moving libraries
+
+mkdir -p Application/Submodules/
+cp ../Submodules/SFML/Build/lib/* Application/Submodules/.
+cp ../Submodules/TGUI/Build/lib/* Application/Submodules/.
+
 # Cleaning deployement files
 
 rm Makefile

@@ -21,36 +21,38 @@ variables:
 .build_template: &build_configuration
     stage: build
     script:
-        - ls
-        - cd Submodules # golPlayground/Submodules
-        - cd SFML
-        - git checkout 2.5.x
-        - mkdir build && cd build # golPlayground/Submodules/SFML/build
-        - cmake .. -DCMAKE_BUILD_TYPE=Release
-        - make -j2
-        - make install
-        - cd ../.. # golPlayground/Submodules
-        - ls
-        - cd TGUI # golPlayground/Submodules/TGUI
-        - git checkout 0.8
-        - mkdir build && cd build # golPlayground/Submodules/TGUI/build
-        - cmake .. -DCMAKE_BUILD_TYPE=Release
-        - make -j2
-        - make install
-        - cd ../../.. # golPlayground
-        - ls
-        - cd Build # golPlayground/Build
-        - cmake .. -DCMAKE_BUILD_TYPE=Release
-        - make all
-        - mkdir -p Application/Submodules/
-        - cp ../Submodules/SFML/build/lib/* Application/Submodules/.
-        - cp ../Submodules/TGUI/build/lib/* Application/Submodules/.
-        - rm -rf Application/CMakeFiles/
-        - rm Application/Makefile
-        - rm Application/cmake_install.cmake
+        # - ls
+        # - cd Submodules # golPlayground/Submodules
+        # - cd SFML
+        # - git checkout 2.5.x
+        # - mkdir build && cd build # golPlayground/Submodules/SFML/build
+        # - cmake .. -DCMAKE_BUILD_TYPE=Release
+        # - make -j2
+        # - make install
+        # - cd ../.. # golPlayground/Submodules
+        # - ls
+        # - cd TGUI # golPlayground/Submodules/TGUI
+        # - git checkout 0.8
+        # - mkdir build && cd build # golPlayground/Submodules/TGUI/build
+        # - cmake .. -DCMAKE_BUILD_TYPE=Release
+        # - make -j2
+        # - make install
+        # - cd ../../.. # golPlayground
+        # - ls
+        # - cd Build # golPlayground/Build
+        # - cmake .. -DCMAKE_BUILD_TYPE=Release
+        # - make all
+        # -
+        # - mkdir -p Application/Submodules/
+        # - cp ../Submodules/SFML/build/lib/* Application/Submodules/.
+        # - cp ../Submodules/TGUI/build/lib/* Application/Submodules/.
+        # - rm -rf Application/CMakeFiles/
+        # - rm Application/Makefile
+        # - rm Application/cmake_install.cmake
+        - ./Build/INSTALL.sh
         - mkdir -p Application/Binaries/
         - mv Application/golPlayground Application/Binaries/.
-        - cp run.sh Application/.
+        - cp INSTALL.sh Application/.
         - mv Application golPlayground
         - zip -r golPlayground-${CI_JOB_NAME}.zip golPlayground
         - mv *.zip `basename *.zip | sed 's/-build//g'`
