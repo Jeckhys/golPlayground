@@ -58,8 +58,8 @@ variables:
         - zip -r golPlayground-${CI_JOB_NAME}.zip golPlayground
         - mv *.zip `basename *.zip | sed 's/-build//g'`
         - mkdir -p Tests/Submodules/
-        - cp ../Submodules/SFML/build/lib/* Tests/Submodules/.
-        - cp ../Submodules/TGUI/build/lib/* Tests/Submodules/.
+        - cp ../Submodules/SFML/Build/lib/* Tests/Submodules/.
+        - cp ../Submodules/TGUI/Build/lib/* Tests/Submodules/.
         - rm -rf Tests/CMakeFiles/
         - rm Tests/Makefile
         - rm Tests/cmake_install.cmake
