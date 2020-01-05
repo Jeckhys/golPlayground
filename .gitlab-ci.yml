@@ -54,7 +54,6 @@ variables:
         - cd Build # golPlayground/Build
         - mkdir -p Application/Binaries/
         - mv Application/golPlayground Application/Binaries/.
-        - cp INSTALL.sh Application/.
         - mv Application golPlayground
         - zip -r golPlayground-${CI_JOB_NAME}.zip golPlayground
         - mv *.zip `basename *.zip | sed 's/-build//g'`
