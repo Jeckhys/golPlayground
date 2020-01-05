@@ -64,8 +64,8 @@ variables:
         - rm Tests/Makefile
         - rm Tests/cmake_install.cmake
         - mkdir -p Tests/Binaries/
-        - mv Tests/golPlayground_Tests Tests/Binaries/.
-        - zip -r golPlayground_Tests-${CI_JOB_NAME}.zip Tests
+        - mv Tests/golTests Tests/Binaries/.
+        - zip -r golTests-${CI_JOB_NAME}.zip Tests
     artifacts:
         when: on_success
         expire_in: 2h
@@ -76,11 +76,11 @@ variables:
     stage: test
     script:
         - cd Build
-        - unzip golPlayground_Tests*.zip
+        - unzip golTests*.zip
         - cd Tests/
         - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$PWD/Submodules"
-        - chmod +x Binaries/golPlayground_Tests
-        - ./Binaries/golPlayground_Tests
+        - chmod +x Binaries/golTests
+        - ./Binaries/golTests
     artifacts:
         when: on_success
         expire_in: 2h
