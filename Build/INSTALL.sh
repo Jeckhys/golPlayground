@@ -10,7 +10,7 @@ mkdir -p Submodules/SFML/Build
 cd Submodules/SFML/Build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j2
-sudo make install
+make install
 
 cd ../../..
 
@@ -24,7 +24,7 @@ mkdir -p Submodules/TGUI/Build
 cd Submodules/TGUI/Build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j2
-sudo make install
+make install
 
 cd ../../..
 
@@ -35,11 +35,15 @@ cd Build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make all
 
+ls
+
 # Moving libraries
 
 mkdir -p Application/Submodules/
 cp ../Submodules/SFML/Build/lib/* Application/Submodules/.
 cp ../Submodules/TGUI/Build/lib/* Application/Submodules/.
+
+ls
 
 # Cleaning deployement files
 
