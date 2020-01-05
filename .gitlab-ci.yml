@@ -49,8 +49,9 @@ variables:
         # - rm -rf Application/CMakeFiles/
         # - rm Application/Makefile
         # - rm Application/cmake_install.cmake
-        - cd Build # golPlayground/Build
+        - mv Build/INSTALL.sh .
         - ./INSTALL.sh
+        - cd Build # golPlayground/Build
         - mkdir -p Application/Binaries/
         - mv Application/golPlayground Application/Binaries/.
         - cp INSTALL.sh Application/.
