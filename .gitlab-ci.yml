@@ -299,7 +299,7 @@ deploy:fedora-24:
     <<: *deploy_configuration
     image: fedora:24
     before_script:
-        - 'which ssh-agent || ( dnf install openssh-client -y )'
+        - dnf install openssh-client -y
         - eval $(ssh-agent -s)
         - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
         - mkdir -p ~/.ssh
@@ -356,7 +356,7 @@ deploy:fedora-25:
     <<: *deploy_configuration
     image: fedora:25
     before_script:
-        - 'which ssh-agent || ( dnf install openssh-client -y )'
+        - dnf install openssh-client -y
         - eval $(ssh-agent -s)
         - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
         - mkdir -p ~/.ssh
@@ -413,7 +413,7 @@ deploy:fedora-26:
     <<: *deploy_configuration
     image: fedora:26
     before_script:
-        - 'which ssh-agent || ( dnf install openssh-client -y )'
+        - dnf install openssh-client -y
         - eval $(ssh-agent -s)
         - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
         - mkdir -p ~/.ssh
@@ -470,7 +470,7 @@ deploy:fedora-27:
     <<: *deploy_configuration
     image: fedora:27
     before_script:
-        - 'which ssh-agent || ( dnf install openssh-client -y )'
+        - dnf install openssh-client -y
         - eval $(ssh-agent -s)
         - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
         - mkdir -p ~/.ssh
@@ -527,7 +527,7 @@ deploy:fedora-28:
     <<: *deploy_configuration
     image: fedora:28
     before_script:
-        - 'which ssh-agent || ( dnf install openssh-client -y )'
+        - dnf install openssh-client -y
         - eval $(ssh-agent -s)
         - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
         - mkdir -p ~/.ssh
