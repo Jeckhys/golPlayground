@@ -91,7 +91,7 @@ variables:
     stage: deploy
     script:
         - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./Build/golPlayground*.zip ${USERNAME}@${HOST}:./golPlayground_Releases/latest/linux/.
-        artifacts:
+    artifacts:
         when: on_success
         expire_in: 90 day
         paths:
