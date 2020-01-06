@@ -90,8 +90,8 @@ variables:
 .deploy_template: &deploy_configuration
     stage: deploy
     script:
-        - curl -T Build/golPlayground*.zip ftp://${FTP_USERNAME}:${FTP_PASSWORD}@${FTP_HOSTNAME}/www/latest/linux/
-    artifacts:
+        - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./Build/golPlayground*.zip ${USERNAME}@${HOST}:./golPlayground_Releases/latest/linux/.
+        artifacts:
         when: on_success
         expire_in: 90 day
         paths:
@@ -140,8 +140,11 @@ deploy:debian-9:
     <<: *deploy_configuration
     image: debian:9
     before_script:
-        - apt-get update -y
-        - apt-get -y install curl
+        - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+        - eval $(ssh-agent -s)
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
     dependencies:
         - test:debian-9
 
@@ -188,8 +191,11 @@ deploy:ubuntu-16.04:
     <<: *deploy_configuration
     image: ubuntu:xenial
     before_script:
-        - apt-get update -y
-        - apt-get -y install curl
+        - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+        - eval $(ssh-agent -s)
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
     dependencies:
         - test:ubuntu-16.04
 
@@ -236,8 +242,11 @@ deploy:ubuntu-18.04:
     <<: *deploy_configuration
     image: ubuntu:bionic
     before_script:
-        - apt-get update -y
-        - apt-get -y install curl
+        - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+        - eval $(ssh-agent -s)
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
     dependencies:
         - test:ubuntu-18.04
 
@@ -290,7 +299,11 @@ deploy:fedora-24:
     <<: *deploy_configuration
     image: fedora:24
     before_script:
-        - dnf -y install curl
+        - 'which ssh-agent || ( dnf install openssh-client -y )'
+        - eval $(ssh-agent -s)
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
     dependencies:
         - test:fedora-24
 
@@ -343,7 +356,11 @@ deploy:fedora-25:
     <<: *deploy_configuration
     image: fedora:25
     before_script:
-        - dnf -y install curl
+        - 'which ssh-agent || ( dnf install openssh-client -y )'
+        - eval $(ssh-agent -s)
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
     dependencies:
         - test:fedora-25
 
@@ -396,7 +413,11 @@ deploy:fedora-26:
     <<: *deploy_configuration
     image: fedora:26
     before_script:
-        - dnf -y install curl
+        - 'which ssh-agent || ( dnf install openssh-client -y )'
+        - eval $(ssh-agent -s)
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
     dependencies:
         - test:fedora-26
 
@@ -449,7 +470,11 @@ deploy:fedora-27:
     <<: *deploy_configuration
     image: fedora:27
     before_script:
-        - dnf -y install curl
+        - 'which ssh-agent || ( dnf install openssh-client -y )'
+        - eval $(ssh-agent -s)
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
     dependencies:
         - test:fedora-27
 
@@ -502,6 +527,10 @@ deploy:fedora-28:
     <<: *deploy_configuration
     image: fedora:28
     before_script:
-        - dnf -y install curl
+        - 'which ssh-agent || ( dnf install openssh-client -y )'
+        - eval $(ssh-agent -s)
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
     dependencies:
         - test:fedora-28
