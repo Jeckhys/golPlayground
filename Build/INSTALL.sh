@@ -8,9 +8,9 @@ cd ../..
 
 mkdir -p Submodules/SFML/Build
 cd Submodules/SFML/Build
-cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 make -j2
-make install
+sudo make install
 
 cd ../../..
 
@@ -22,16 +22,16 @@ cd ../..
 
 mkdir -p Submodules/TGUI/Build
 cd Submodules/TGUI/Build
-cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 make -j2
-make install
+sudo make install
 
 cd ../../..
 
 # Compiling golPlayground
 
 cd Build
-cmake .. -DCMAKE_BUILD_TYPE=Release
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 make all
 
 # Moving libraries
