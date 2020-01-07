@@ -1,7 +1,7 @@
 ### INFORMATIONS ###
 
-# Repository : https://github.com/TaktixOrganization/Taktix
-# Builds : https://travis-ci.com/TaktixOrganization/Taktix
+# Repository : https://github.com/matthieu-locussol/golPlayground
+# Builds     : https://travis-ci.com/matthieu-locussol/golPlayground
 
 language:
     cpp
@@ -34,8 +34,8 @@ matrix:
           osx_image: xcode6.4
 
 install:
-    - mv Build/INSTALL.sh .
-    - sudo ./INSTALL.sh
+    - mv Build/install_osx.sh .
+    - sudo ./install_osx.sh
     - cd Build # golPlayground/Build
     - sudo mkdir -p Application/Binaries/
     - sudo mv Application/golPlayground Application/Binaries/.
