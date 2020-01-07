@@ -45,4 +45,7 @@ install:
 
 script:
     - ./Tests/golTests
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
     - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./Build/golPlayground*.zip ${USERNAME}@${HOST}:./golPlayground_Releases/latest/osx/.
