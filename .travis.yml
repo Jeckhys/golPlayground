@@ -45,4 +45,4 @@ install:
 
 script:
     - ./Tests/golTests
-    - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./Build/golPlayground*.zip ${USERNAME}@${HOST}:./golPlayground_Releases/latest/windows/.
+    - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./Build/golPlayground*.zip ${USERNAME}@${HOST}:./golPlayground_Releases/latest/osx/.
