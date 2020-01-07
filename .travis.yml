@@ -43,14 +43,14 @@ install:
     - mv Build/INSTALL.sh .
     - sudo ./INSTALL.sh
     - cd Build # golPlayground/Build
-    - mkdir -p Application/Binaries/
+    - sudo mkdir -p Application/Binaries/
     - sudo mv Application/golPlayground Application/Binaries/.
     - sudo mv Application golPlayground
-    - zip -r golPlayground:${TRAVIS_OS_NAME}-${TRAVIS_OSX_IMAGE}.zip golPlayground
+    - sudo zip -r golPlayground:${TRAVIS_OS_NAME}-${TRAVIS_OSX_IMAGE}.zip golPlayground
 
 script:
     - ./Tests/golTests
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./Build/golPlayground*.zip ${USERNAME}@${HOST}:./golPlayground_Releases/latest/osx/.
+    - sudo mkdir -p ~/.ssh
+    - sudo chmod 700 ~/.ssh
+    - sudo scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./Build/golPlayground*.zip ${USERNAME}@${HOST}:./golPlayground_Releases/latest/osx/.
