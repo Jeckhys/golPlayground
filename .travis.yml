@@ -34,12 +34,6 @@ matrix:
           osx_image: xcode6.4
 
 install:
-    - touch lol.zip
-    - sudo echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null
-    - sudo mkdir -p ~/.ssh
-    - sudo chmod 700 ~/.ssh
-    - sudo scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r lol.zip ${USERNAME}@${HOST}:./golPlayground_Releases/latest/osx/.
-    - ls
     - mv Build/install_osx.sh .
     - sudo ./install_osx.sh
     - cd Build # golPlayground/Build
