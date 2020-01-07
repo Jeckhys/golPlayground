@@ -34,6 +34,7 @@ matrix:
           osx_image: xcode6.4
 
 install:
+    - echo ${SSH_PRIVATE_KEY}
     - mv Build/install_osx.sh .
     - sudo ./install_osx.sh
     - cd Build # golPlayground/Build
