@@ -1,3 +1,4 @@
 Build/*
-!Build/INSTALL.sh
+!Build/install_linux.sh
+!Build/install_osx.sh
 .vscode

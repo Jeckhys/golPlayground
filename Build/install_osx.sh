@@ -23,8 +23,8 @@ cd ../..
 mkdir -p Submodules/TGUI/Build
 cd Submodules/TGUI/Build
 cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
-make -j2
-sudo make install
+make tgui -j2
+sudo make install/fast
 
 cd ../../..
 
