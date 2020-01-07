@@ -10,7 +10,7 @@ mkdir -p Submodules/SFML/Build
 cd Submodules/SFML/Build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j2
-sudo make install
+make install
 
 cd ../../..
 
@@ -24,7 +24,7 @@ mkdir -p Submodules/TGUI/Build
 cd Submodules/TGUI/Build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j2
-sudo make install
+make install
 
 cd ../../..
 
