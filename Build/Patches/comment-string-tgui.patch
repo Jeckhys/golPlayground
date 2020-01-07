@@ -1,0 +1,48 @@
+diff --git a/include/TGUI/String.hpp b/include/TGUI/String.hpp
+index ec3ca0c6..7d62e79d 100644
+--- a/include/TGUI/String.hpp
++++ b/include/TGUI/String.hpp
+@@ -840,8 +840,8 @@ namespace tgui
+         return String(left.m_string + std::move(right.m_string));
+     }
+ 
+-    TGUI_API std::basic_ostream<char>& operator<<(std::basic_ostream<char>& os, const String& str);
+-    TGUI_API std::basic_ostream<wchar_t>& operator<<(std::basic_ostream<wchar_t>& os, const String& str);
++    // TGUI_API std::basic_ostream<char>& operator<<(std::basic_ostream<char>& os, const String& str);
++    // TGUI_API std::basic_ostream<wchar_t>& operator<<(std::basic_ostream<wchar_t>& os, const String& str);
+     //TGUI_API std::basic_ostream<char16_t>& operator<<(std::basic_ostream<char16_t>& os, const String& str);
+     //TGUI_API std::basic_ostream<char32_t>& operator<<(std::basic_ostream<char32_t>& os, const String& str);
+ 
+diff --git a/src/TGUI/String.cpp b/src/TGUI/String.cpp
+index 1059e352..7508bf6e 100644
+--- a/src/TGUI/String.cpp
++++ b/src/TGUI/String.cpp
+@@ -2281,17 +2281,17 @@ namespace tgui
+ 
+     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+-    std::basic_ostream<char>& operator<<(std::basic_ostream<char>& os, const String& str)
+-    {
+-        os << std::string(str);
+-        return os;
+-    }
+-
+-    std::basic_ostream<wchar_t>& operator<<(std::basic_ostream<wchar_t>& os, const String& str)
+-    {
+-        os << std::wstring(str);
+-        return os;
+-    }
++    // std::basic_ostream<char>& operator<<(std::basic_ostream<char>& os, const String& str)
++    // {
++    //     os << std::string(str);
++    //     return os;
++    // }
++
++    // std::basic_ostream<wchar_t>& operator<<(std::basic_ostream<wchar_t>& os, const String& str)
++    // {
++    //     os << std::wstring(str);
++    //     return os;
++    // }
+ 
+ // Code didn't compile with AppleClang 9.1 (Xcode 9.4). Android build also failed, so libc++ issue?
+ /*

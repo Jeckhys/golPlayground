@@ -18,6 +18,7 @@ cd ../../..
 
 cd Submodules/TGUI
 git checkout 0.8
+git apply ../../Build/Patches/comment-string-tgui.patch
 cd ../..
 
 mkdir -p Submodules/TGUI/Build
