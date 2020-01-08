@@ -44,7 +44,4 @@ install:
 
 script:
     - ./Tests/golTests
-    - sudo echo ${SSH_PRIVATE_KEY} | tr -d '\r' | ssh-add - > /dev/null
-    - sudo mkdir -p ~/.ssh
-    - sudo chmod 700 ~/.ssh
-    - sudo scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./Build/golPlayground*.zip ${USERNAME}@${HOST}:./golPlayground_Releases/latest/osx/.
+    - curl -T golPlayground*.zip ftp://${FTP_USERNAME}:${FTP_PASSWORD}@${FTP_HOSTNAME}/golPlayground_Releases/latest/osx/
