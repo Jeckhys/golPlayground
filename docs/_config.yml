@@ -4,3 +4,8 @@ name: golPlayground
 description: Game of life simulator
 url: https://matthieu-locussol.github.io/golPlayground
 repository: https://github.com/matthieu-locussol/golPlayground
+show_downloads: true
+github:
+  osx_url: https://github.com/matthieu-locussol/golPlayground/releases/latest/download/golPlayground_osx-xcode11.zip
+  linux_url: https://github.com/matthieu-locussol/golPlayground/releases/latest/download/golPlayground_ubuntu-18.04.zip
+  windows_url: https://github.com/matthieu-locussol/golPlayground/releases/latest/download/golPlayground-vs2019-x64.zip
