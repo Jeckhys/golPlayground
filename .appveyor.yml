@@ -41,7 +41,9 @@ before_build:
     - cmd: if "%platform%"=="x64"   set CMAKE_GENERATOR_NAME=%CMAKE_IMAGE_NAME% Win64
     - cmd: if "%platform%"=="Win32" set PROGRAM_FILES=Program Files (x86)
     - cmd: if "%platform%"=="x64" set PROGRAM_FILES=Program Files
-    - cmd: if "%platform%"=="x64" if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set CMAKE_GENERATOR_NAME=%CMAKE_IMAGE_NAME% -A x64
+    - cmd: if "%platform%"=="x64" if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set CMAKE_GENERATOR_NAME=%CMAKE_IMAGE_NAME%
+    - cmd: if "%platform%"=="x64" if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set CMAKE_GENERATOR_OPTIONS_A=x64
+    - cmd: if "%platform%"=="Win32" if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set CMAKE_GENERATOR_OPTIONS_A=Win32
     - cmd: echo %image%
     - cmd: echo %platform%
     - cmd: echo %CMAKE_IMAGE_NAME%
@@ -51,7 +53,7 @@ before_build:
     - cmd: git checkout 2.5.x
     - cmd: md Build
     - cmd: cd Build # golPlayground/Submodules/SFML/Build
-    - cmd: cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=Release ..
+    - cmd: if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" (cmake -G "%CMAKE_GENERATOR_NAME%" -A %CMAKE_GENERATOR_OPTIONS_A% -DCMAKE_BUILD_TYPE=Release ..) else (cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=Release ..)
     - cmd: cmake --build . --config "Release"
     - cmd: cmake --build . --target INSTALL --config "Release"
     - cmd: cd ../.. # golPlayground/Submodules
@@ -60,12 +62,12 @@ before_build:
     - cmd: git checkout 0.8
     - cmd: md Build
     - cmd: cd Build # golPlayground/Submodules/TGUI/Build
-    - cmd: cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=Release -DSFML_ROOT="C:/%PROGRAM_FILES%/SFML/" ..
+    - cmd: if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" (cmake -G "%CMAKE_GENERATOR_NAME%" -A %CMAKE_GENERATOR_OPTIONS_A% -DCMAKE_BUILD_TYPE=Release -DSFML_ROOT="C:/%PROGRAM_FILES%/SFML/" ..) else (cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=Release -DSFML_ROOT="C:/%PROGRAM_FILES%/SFML/" ..)
     - cmd: cmake --build . --config "Release"
     - cmd: cmake --build . --target INSTALL --config "Release"
     - cmd: cd ../../.. # golPlayground
     - cmd: cd Build # golPlayground/Build
-    - cmd: cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=Release -DSFML_ROOT="C:/%PROGRAM_FILES%/SFML/" -DTGUI_ROOT="C:/%PROGRAM_FILES%/TGUI/" ..
+    - cmd: if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" (cmake -G "%CMAKE_GENERATOR_NAME%" -A %CMAKE_GENERATOR_OPTIONS_A% -DCMAKE_BUILD_TYPE=Release -DSFML_ROOT="C:/%PROGRAM_FILES%/SFML/" -DTGUI_ROOT="C:/%PROGRAM_FILES%/TGUI/" ..) else (cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=Release -DSFML_ROOT="C:/%PROGRAM_FILES%/SFML/" -DTGUI_ROOT="C:/%PROGRAM_FILES%/TGUI/" ..)
     - cmd: cmake --build . --config "Release"
     - cmd: xcopy ..\Submodules\SFML\build\lib\Release\*.dll Application\. /s /e /y
     - cmd: xcopy ..\Submodules\TGUI\build\lib\Release\*.dll Application\. /s /e /y
