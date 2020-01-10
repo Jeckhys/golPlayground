@@ -10,6 +10,7 @@ platform:
 image:
     - Visual Studio 2015
     - Visual Studio 2017
+    - Visual Studio 2019
 
 environment:
     MSVC_DEFAULT_OPTIONS: ON
