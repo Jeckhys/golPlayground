@@ -1,0 +1,109 @@
+### INFORMATIONS ###
+
+# Repository : https://github.com/TaktixOrganization/Taktix
+# Builds     : https://ci.appveyor.com/project/Jeckhys/taktix
+
+platform:
+    - Win32
+    - x64
+
+image:
+    - Visual Studio 2015
+    - Visual Studio 2017
+
+environment:
+    MSVC_DEFAULT_OPTIONS: ON
+    FTP_HOSTNAME:
+      secure: lvnNWkzq6ap/9+XD34nAXA==
+    FTP_USERNAME:
+      secure: /RDpLEKEfBBCZZOX63LssA==
+    FTP_PASSWORD:
+      secure: j5hnloFsUso4YdC1OoMJDg==
+
+init:
+    - cmd: cmake --version
+    - cmd: msbuild /version
+
+clone_folder: C:\projects\Taktix
+
+install:
+    - cmd: git submodule update --init --recursive
+
+before_build:
+    - cmd: if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" set CMAKE_IMAGE_NAME=Visual Studio 14 2015
+    - cmd: if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" set CMAKE_IMAGE_NAME=Visual Studio 15 2017
+    - cmd: if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set CMAKE_IMAGE_NAME=Visual Studio 16 2019
+    - cmd: if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" set VS_DATE=vs2015
+    - cmd: if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" set VS_DATE=vs2017
+    - cmd: if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set VS_DATE=vs2019
+    - cmd: if "%platform%"=="Win32" set CMAKE_GENERATOR_NAME=%CMAKE_IMAGE_NAME%
+    - cmd: if "%platform%"=="x64"   set CMAKE_GENERATOR_NAME=%CMAKE_IMAGE_NAME% Win64
+    - cmd: if "%platform%"=="Win32" set PROGRAM_FILES=Program Files (x86)
+    - cmd: if "%platform%"=="x64" set PROGRAM_FILES=Program Files
+    - cmd: echo %image%
+    - cmd: echo %platform%
+    - cmd: echo %CMAKE_IMAGE_NAME%
+    - cmd: echo %CMAKE_GENERATOR_NAME%
+    - cmd: cd C:\projects\golPlayground\Submodules # golPlayground/Submodules
+    - cmd: cd SFML # golPlayground/Submodules/SFML
+    - cmd: git checkout 2.5.x
+    - cmd: md Build
+    - cmd: cd Build # golPlayground/Submodules/SFML/Build
+    - cmd: cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=Release ..
+    - cmd: cmake --build . --config "Release"
+    - cmd: cmake --build . --target INSTALL --config "Release"
+    - cmd: cd ../.. # golPlayground/Submodules
+    - cmd: dir .
+    - cmd: cd TGUI # golPlayground/Submodules/TGUI
+    - cmd: git checkout 0.8
+    - cmd: md Build
+    - cmd: cd Build # golPlayground/Submodules/TGUI/Build
+    - cmd: cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=Release -DSFML_ROOT="C:/%PROGRAM_FILES%/SFML/" ..
+    - cmd: cmake --build . --config "Release"
+    - cmd: cmake --build . --target INSTALL --config "Release"
+    - cmd: cd ../../.. # golPlayground
+    - cmd: cd Build # golPlayground/Build
+    - cmd: cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=Release -DSFML_ROOT="C:/%PROGRAM_FILES%/SFML/" -DTGUI_ROOT="C:/%PROGRAM_FILES%/TGUI/" ..
+    - cmd: cmake --build . --config "Release"
+    - cmd: xcopy ..\Libraries\SFML\build\lib\Release\*.dll Application\. /s /e /y
+    - cmd: xcopy ..\Libraries\TGUI\build\lib\Release\*.dll Application\. /s /e /y
+    - cmd: dir Application\
+    - cmd: rd Application\CMakeFiles\ /s /q
+    - cmd: del Application\cmake_install.cmake
+    - cmd: del Application\golPlayground.vcxproj
+    - cmd: del Application\golPlayground.vcxproj.filters
+    - cmd: xcopy Application\Release\golPlayground.exe Application\. /y
+    - cmd: rd Application\Release\ /s /q
+    - cmd: rd Application\golPlayground.dir\ /s /q
+    - cmd: ren Application golPlayground
+    - cmd: move C:\projects\golPlayground\Build\golPlayground C:\projects\golPlayground\.
+
+build:
+    project: C:\projects\golPlayground\Build\ALL_BUILD.vcxproj
+    parallel: true
+    verbosity: normal
+
+after_build:
+    - cmd: dir .
+
+test: on
+test_script:
+    - cmd: cd C:\projects\golPlayground\Build\Tests\Release\
+    - cmd: golTests.exe
+
+artifacts:
+    - path: golPlayground
+      name: golPlayground-%VS_DATE%-%platform%
+      type: zip
+
+deploy:
+    provider: FTP
+    protocol: ftp
+    host:
+        secure: lvnNWkzq6ap/9+XD34nAXA==
+    username:
+        secure: /RDpLEKEfBBCZZOX63LssA==
+    password:
+        secure: j5hnloFsUso4YdC1OoMJDg==
+    folder: /golPlayground_Releases/latest/windows/
+    artifact: golPlayground-%VS_DATE%-%platform%
