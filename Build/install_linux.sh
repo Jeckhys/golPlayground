@@ -39,6 +39,8 @@ make all
 mkdir -p Application/Submodules/
 cp ../Submodules/SFML/Build/lib/* Application/Submodules/.
 cp ../Submodules/TGUI/Build/lib/* Application/Submodules/.
+chmod u+x run.sh
+cp run.sh Application/.
 
 # Cleaning deployement files
 

@@ -1,5 +1,6 @@
 Build/*
 !Build/install_linux.sh
 !Build/install_osx.sh
+!Build/run.sh
 !Build/Patches
 .vscode
