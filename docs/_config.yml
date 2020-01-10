@@ -1,0 +1,6 @@
+theme: jekyll-theme-cayman
+version: 1.0.0
+name: golPlayground
+description: Game of life simulator
+url: https://matthieu-locussol.github.io/golPlayground
+repository: https://github.com/matthieu-locussol/golPlayground
