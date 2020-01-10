@@ -1,7 +1,7 @@
 ### INFORMATIONS ###
 
-# Repository : https://github.com/TaktixOrganization/Taktix
-# Builds     : https://ci.appveyor.com/project/Jeckhys/taktix
+# Repository : https://github.com/matthieu-locussol/golPlayground
+# Builds     : https://ci.appveyor.com/project/Jeckhys/golplayground
 
 platform:
     - Win32
@@ -25,7 +25,7 @@ init:
     - cmd: cmake --version
     - cmd: msbuild /version
 
-clone_folder: C:\projects\Taktix
+clone_folder: C:\projects\golPlayground
 
 install:
     - cmd: git submodule update --init --recursive
