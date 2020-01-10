@@ -41,6 +41,7 @@ before_build:
     - cmd: if "%platform%"=="x64"   set CMAKE_GENERATOR_NAME=%CMAKE_IMAGE_NAME% Win64
     - cmd: if "%platform%"=="Win32" set PROGRAM_FILES=Program Files (x86)
     - cmd: if "%platform%"=="x64" set PROGRAM_FILES=Program Files
+    - cmd: if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set PROGRAM_FILES=Program Files (x86)
     - cmd: if "%platform%"=="x64" if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set CMAKE_GENERATOR_NAME=%CMAKE_IMAGE_NAME%
     - cmd: if "%platform%"=="x64" if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set CMAKE_GENERATOR_OPTIONS_A=x64
     - cmd: if "%platform%"=="Win32" if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2019" set CMAKE_GENERATOR_OPTIONS_A=Win32
