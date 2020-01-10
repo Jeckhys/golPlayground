@@ -66,8 +66,8 @@ before_build:
     - cmd: cd Build # golPlayground/Build
     - cmd: cmake -G "%CMAKE_GENERATOR_NAME%" -DCMAKE_BUILD_TYPE=Release -DSFML_ROOT="C:/%PROGRAM_FILES%/SFML/" -DTGUI_ROOT="C:/%PROGRAM_FILES%/TGUI/" ..
     - cmd: cmake --build . --config "Release"
-    - cmd: xcopy ..\Libraries\SFML\build\lib\Release\*.dll Application\. /s /e /y
-    - cmd: xcopy ..\Libraries\TGUI\build\lib\Release\*.dll Application\. /s /e /y
+    - cmd: xcopy ..\Submodules\SFML\build\lib\Release\*.dll Application\. /s /e /y
+    - cmd: xcopy ..\Submodules\TGUI\build\lib\Release\*.dll Application\. /s /e /y
     - cmd: dir Application\
     - cmd: rd Application\CMakeFiles\ /s /q
     - cmd: del Application\cmake_install.cmake
