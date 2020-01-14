@@ -57,17 +57,19 @@ variables:
         when: on_success
         expire_in: 2h
         paths:
-            - Build/golPlayground:*.zip
+            - Build/golPlayground*.zip
 
 .deploy_template: &deploy_configuration
     stage: deploy
     script:
+        - ls
+        - ls Build
         - curl -T Build/golPlayground*.zip ftp://${FTP_USERNAME}:${FTP_PASSWORD}@${FTP_HOSTNAME}/golPlayground_Releases/latest/linux/
     artifacts:
         when: on_success
         expire_in: 90 day
         paths:
-            - Build/golPlayground:*.zip
+            - Build/golPlayground*.zip
 
 ### DEBIAN 9 (STRETCH) CONFIGURATION ###
 
